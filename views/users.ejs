@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            margin-top: 50px;
+            font-size: 36px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #ff4d4d;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>All users in system</h1>
+    <ul id="userList">
+        <% users.forEach((user) => { %>
+            <li>
+                <%= user.userName %>
+                <button onclick="deleteUser('<%= user.id %>')">Delete</button>
+            </li>
+        <% }) %>
+    </ul>
+    <script>
+        async function deleteUser(userId) {
+            try {
+                const response = await fetch(`/delete-user/${userId}`, { method: 'DELETE' });
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    alert('Error deleting user');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error deleting user');
+            }
+        }
+    </script>
+</body>
+</html>
