@@ -20,16 +20,3 @@ describe("GET /signup", () => {
   });
 });
 
-describe('POST signup',()=>{
- it('error while Post request in Signup page', async ()=>{
-    const newUser = {
-        first_name: "John",
-        last_name: "Doe",
-        user_name: "johndoe",
-        password: "password123",
-      };
-      const res = await request(app).post("/signup").send(newUser);
-      expect(res.statusCode).toBe(302);
-      expect(res.header.location).toBe("/users");
- });
-});

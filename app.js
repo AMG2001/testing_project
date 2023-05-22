@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const firebase = require("firebase/app");
+const { signup } = require("./routes/routes");
 require("firebase/auth");
 require("firebase/firestore");
 
@@ -22,6 +23,8 @@ const firebaseConfig = {
   };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+
+app.post("/signup", signup);
 
 // Routes
 app.get("/", (req, res) => {
